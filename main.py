@@ -4,6 +4,7 @@ from tkinter import messagebox, simpledialog
 from InventoryManagement import InventoryManager
 from Sections import InventorySection
 from RegularItems import RegularItem, PerishableItem
+from user import User 
 
 class WarehouseApp(tk.Tk):
     def __init__(self, inventory_manager):
@@ -129,3 +130,4 @@ if __name__ == '__main__':
 
     app = WarehouseApp(inventory_manager)
     app.mainloop()
+
