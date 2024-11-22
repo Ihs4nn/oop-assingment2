@@ -4,7 +4,7 @@ class User:
         self.password = password
         self.role = role
 
-    def is_authorized(self, action):
+    def authorised(self, action):
         permissions = {
             'admin': ['add', 'remove', 'move', 'view']
         }

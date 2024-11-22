@@ -16,15 +16,15 @@ class loginScreen(tk.Tk):
         # Creating the actual login screen, asking user for username and password
         self.title("Login")
         self.geometry("300x150")
-
+        # Asks for the Username 
         tk.Label(self, text="Username:*").pack()
         self.username_entry = tk.Entry(self)
         self.username_entry.pack()
-
+        # Asks for the password
         tk.Label(self, text="Password:*").pack()
         self.password_entry = tk.Entry(self, show="*")
         self.password_entry.pack()
-
+        # Created a login button that when pressed, calls 'validate_login' function
         self.login_button = tk.Button(self, text="Login", command=self.validate_login)
         self.login_button.pack()
     
@@ -35,13 +35,17 @@ class loginScreen(tk.Tk):
 
         # Check if the entered username and password match the stored user
         if userid == accepted_user.username and password == accepted_user.password:
+            # Destroys the login box created
             self.destroy()
+            # Shows message depending on role
             messagebox.showinfo("Login Successful", f"Welcome, {accepted_user.role.capitalize()}!")
+            # Initalises and passes parameters needed for the second screen to run
             inventory_manager = InventoryManager() 
             inventory_manager.add_section(InventorySection("Electronics")) 
             inventory_manager.add_section(InventorySection("Automotive")) 
             app = WarehouseApp(User, inventory_manager) 
             app.mainloop() 
+        # Error Message handling
         else:
             messagebox.showerror("Login Failed", "Invalid username or password")
 
