@@ -21,6 +21,17 @@ class InventoryManager:
             return [str(item) for item in section.items.values()]
         return []
 
+    # Creating function that gets all items, no matter the section
+    def get_all_items(self):
+        all_items = []
+        # Go through both sections aka 'Electronics' and 'Automotive'
+        for section in self.sections.values():
+            # Gets items in each section
+            for item in section.items.keys():
+                # Adds it to all_items list
+                all_items.append(item)
+        return all_items
+
     def add_stock(self, section_name, name, amount, misc_info = "a"):
         section = self.get_section(section_name)
         if section:
