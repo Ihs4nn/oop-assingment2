@@ -7,7 +7,7 @@ from RegularItems import RegularItem, PerishableItem
 from UserDetails import User 
 
 # Predefined User for prototype:
-accepted_user = User("admin1", "password1", "admin")
+accepted_user = User("1", "1", "admin")
 
 # Login screen
 class loginScreen(tk.Tk):
@@ -17,11 +17,11 @@ class loginScreen(tk.Tk):
         self.title("Login")
         self.geometry("300x150")
         # Asks for the Username 
-        tk.Label(self, text="Username:*").pack()
+        tk.Label(self, text="Username*:").pack()
         self.username_entry = tk.Entry(self)
         self.username_entry.pack()
         # Asks for the password
-        tk.Label(self, text="Password:*").pack()
+        tk.Label(self, text="Password*:").pack()
         self.password_entry = tk.Entry(self, show="*")
         self.password_entry.pack()
         # Created a login button that when pressed, calls 'validate_login' function
@@ -119,6 +119,14 @@ class WarehouseApp(tk.Tk):
         self.inventory_text = tk.Text(self, height = 15, width = 50)
         self.inventory_text.pack()
 
+
+
+        # Audit log button to go to audit screen
+        self.go_to_audit_screen = tk.Button(self, text='Audit Screen', command=self.open_audit_screen)
+        self.go_to_audit_screen.pack()
+
+
+
     def update_move_item_menu(self):
         # Checks if self already has an attribute called 'move_item_menu'
         if hasattr(self, 'move_item_menu'):
@@ -190,9 +198,10 @@ class WarehouseApp(tk.Tk):
         self.update_move_item_menu()
         
 
-# Audit log screen
-
-
+    # Audit log screen
+    def open_audit_screen(self):
+        self.title("Audit Logs")
+        self.geometry("300x600")
 
 if __name__ == '__main__':
     login_screen = loginScreen() 

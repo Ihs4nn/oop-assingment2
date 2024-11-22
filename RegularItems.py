@@ -11,7 +11,6 @@ class RegularItem(InventoryItem):
             raise ValueError("Not enough stock!")
         self.quantity -= amount
 
-
 class PerishableItem(InventoryItem):
     def __init__(self, name, quantity, expiry_date):
         super().__init__(name, quantity)
