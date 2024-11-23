@@ -68,3 +68,15 @@ class InventoryManager:
             inventory.append(str(section))
             inventory.extend(str(item) for item in section.items.values())
         return inventory
+
+    # Function to get stock items that are below a certain threshold
+    def get_low_stock_items(self):
+        # List to store items
+        low_stock_items = []
+        # Gets the items that have a quantity level of 1 or below
+        for section in self.sections.values():
+            for item in section.items.values():
+                if item.quantity <= 1:
+                    low_stock_items.append(item.name)
+        # Returns list so it can be used in main.py
+        return low_stock_items

@@ -179,6 +179,7 @@ class WarehouseApp(tk.Tk):
             self.inventory_manager.add_stock(section_name, name, amount)
             self.update_inventory()
             self.log_action(f"added {amount} stock to '{name}'")
+            self.check_stock_alerts()
         except ValueError as e:
             messagebox.showerror("Error", str(e))
 
@@ -190,6 +191,7 @@ class WarehouseApp(tk.Tk):
             self.inventory_manager.remove_stock(section_name, name, amount)
             self.update_inventory()
             self.log_action(f"removed {amount} stock from '{name}'")
+            self.check_stock_alerts()
         except ValueError as e:
             messagebox.showerror("Error", str(e))
     
@@ -202,6 +204,7 @@ class WarehouseApp(tk.Tk):
             self.inventory_manager.move_stock(from_section_name, to_section_name, item_name, amount)
             self.update_inventory()
             self.log_action(f"moved {amount} of '{item_name}' from '{from_section_name}' to '{to_section_name}'")
+            self.check_stock_alerts()
         except ValueError as e:
             messagebox.showerror("Error", str(e))
 
@@ -211,6 +214,7 @@ class WarehouseApp(tk.Tk):
         for item in inventory:
             self.inventory_text.insert(tk.END, item + '\n')
         self.update_move_item_menu()
+        self.check_stock_alerts()
         
     def log_action(self, action):
         timestamp = datetime.datetime.now().strftime("%H:%M %d/%m/%Y")
@@ -230,6 +234,16 @@ class WarehouseApp(tk.Tk):
         for log in self.audit_logs:
             audit_text.insert(tk.END, log + '\n')
         audit_text.configure(state=tk.DISABLED)
+
+
+
+    def check_stock_alerts(self):
+        low_stock_items = self.inventory_manager.get_low_stock_items()
+        # Gets last item in list, rather than first
+        if low_stock_items:
+            last_item = low_stock_items[-1]
+            messagebox.showwarning("Low Stock Alert", f"Item '{last_item}' has low stock!")
+
 
 if __name__ == '__main__':
     login_screen = loginScreen() 
