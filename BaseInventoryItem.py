@@ -13,6 +13,7 @@ class InventoryItem:
         if amount > self.quantity:
             raise ValueError("Not enough stock!")
         self.quantity -= amount
+        logging.info(f"Removed {amount} stock from {self.name}")
 
     def __str__(self):
         return f'{self.name}: {self.quantity}'

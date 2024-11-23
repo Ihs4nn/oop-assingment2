@@ -1,5 +1,6 @@
 import logging
-from RegularItems import RegularItem, PerishableItem
+from RegularItems import HeavyItem, PerishableItem
+from BaseInventoryItem import InventoryItem
 
 class InventorySection:
     def __init__(self, name):
@@ -20,7 +21,7 @@ class InventorySection:
             if misc_info == "p":
                 item = PerishableItem(name, 0, exp_date)
             else: 
-                item = RegularItem(name, 0)
+                item = InventoryItem(name, 0)
         
         self.add_item(item)
         item.add_stock(amount)
