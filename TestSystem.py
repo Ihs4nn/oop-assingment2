@@ -64,6 +64,7 @@ def test_user_authorisation():
     assert correct_user.authorised("remove") == True
     assert correct_user.authorised("move") == True
     assert correct_user.authorised("view") == True
+    
     # Correcting incorrect 'account' which wont have the authorisation
     incorrect_user = User("admin2", "2", "user") 
     assert incorrect_user.authorised("add") == False

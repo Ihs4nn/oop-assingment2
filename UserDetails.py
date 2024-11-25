@@ -6,7 +6,6 @@ class User:
 
     def authorised(self, action):
         permissions = {
-            'admin': ['add', 'remove', 'move', 'view'],
-            'guest': ['view']
+            'admin': ['add', 'remove', 'move', 'view']
         }
         return action in permissions.get(self.role, [])
