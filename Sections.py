@@ -13,13 +13,15 @@ class InventorySection:
     def get_item(self, name):
         return self.items.get(name)
     
-    def add_stock(self, name, amount, misc_info = None, exp_date = None):
+    def add_stock(self, name, amount, misc_info = None, exp_date = None, weight = None):
         item = self.get_item(name)
         if item:
             item.add_stock(amount)
         else:
             if misc_info == "p":
                 item = PerishableItem(name, 0, exp_date)
+            elif misc_info == "h":
+                item = HeavyItem(name, 0, weight)
             else: 
                 item = InventoryItem(name, 0)
         

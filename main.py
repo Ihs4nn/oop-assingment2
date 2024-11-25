@@ -68,7 +68,6 @@ class WarehouseApp(tk.Tk):
         self.section_menu = tk.OptionMenu(self, self.section_var, *self.inventory_manager.sections.keys())
         self.section_menu.pack()
 
-        ## Item adding fields ##
         tk.Label(self, text='Item Name').pack()
         self.add_item_name = tk.Entry(self)
         self.add_item_name.pack()
@@ -90,7 +89,6 @@ class WarehouseApp(tk.Tk):
         self.add_item_button = tk.Button(self, text='Add Item', command=self.add_item)
         self.add_item_button.pack()
 
-        ## Stock management fields ##
         tk.Label(self, text='Stock Amount').pack()
         self.stock_amount = tk.Entry(self)
         self.stock_amount.pack()
@@ -101,7 +99,6 @@ class WarehouseApp(tk.Tk):
         self.remove_stock_button = tk.Button(self, text='Remove Stock', command=self.remove_stock)
         self.remove_stock_button
 
-        ## Moving stock fields ##
         tk.Label(self, text='Destination Section').pack()
         self.move_to_var = tk.StringVar(self)
         self.move_to_section = tk.OptionMenu(self, self.move_to_var, *self.inventory_manager.sections.keys())
@@ -122,7 +119,6 @@ class WarehouseApp(tk.Tk):
         self.move_stock_button = tk.Button(self, text='Move Stock', command=self.move_stock)
         self.move_stock_button.pack()
 
-        ## Inventory display ##
         self.inventory_text = tk.Text(self, height = 15, width = 50)
         self.inventory_text.pack()
 
@@ -157,7 +153,7 @@ class WarehouseApp(tk.Tk):
             else:
                 item = InventoryItem(name, quantity)
         
-        # Conditional used to add weight to heavyitem class
+            # Conditional used to add weight to heavyitem class
             if self.add_item_weight.get():
                 item = HeavyItem(name, quantity, self.add_item_weight.get())
             else:
@@ -235,15 +231,12 @@ class WarehouseApp(tk.Tk):
             audit_text.insert(tk.END, log + '\n')
         audit_text.configure(state=tk.DISABLED)
 
-
-
     def check_stock_alerts(self):
         low_stock_items = self.inventory_manager.get_low_stock_items()
         # Gets last item in list, rather than first
         if low_stock_items:
             last_item = low_stock_items[-1]
             messagebox.showwarning("Low Stock Alert", f"Item '{last_item}' has low stock!")
-
 
 if __name__ == '__main__':
     login_screen = loginScreen() 
