@@ -67,12 +67,12 @@ def test_user_login():
     result = validate_login("admin1", "1")
     assert result is True
 
-# Test invalid login: wrong username
+# Test invalid login, wrong username
 def test_invalid_username():
     result = validate_login("wronguser", "1")
     assert result is False
 
-# Test invalid login: wrong password
+# Test invalid login, wrong password
 def test_invalid_password():
     result = validate_login("admin1", "wrongpassword")
     assert result is False
