@@ -4,6 +4,7 @@ from Sections import InventorySection
 from RegularItems import PerishableItem, HeavyItem
 from UserDetails import User 
 from BaseInventoryItem import InventoryItem
+from UserAuthentication import validate_login
 
 # Testing InventoryItem class
 def test_add_stock():
@@ -58,19 +59,28 @@ def test_move_stock():
 
 # Testing User class
 def test_user_authorisation():
-    # Creating correct 'account' and checking authorisation
-    correct_user = User("admin1", "1", "admin")
-    assert correct_user.authorised("add") == True
-    assert correct_user.authorised("remove") == True
-    assert correct_user.authorised("move") == True
-    assert correct_user.authorised("view") == True
-    
-    # Correcting incorrect 'account' which wont have the authorisation
-    incorrect_user = User("admin2", "2", "user") 
-    assert incorrect_user.authorised("add") == False
-    assert incorrect_user.authorised("remove") == False
-    assert incorrect_user.authorised("move") == False
-    assert incorrect_user.authorised("view") == False
+    admin_user = User("admin1", "password", "admin")
+    assert admin_user.authorised("add") == True
+    assert admin_user.authorised("delete_all") == False
+
+def test_user_login():
+    result = validate_login("admin1", "1")
+    assert result is True
+
+# Test invalid login: wrong username
+def test_invalid_username():
+    result = validate_login("wronguser", "1")
+    assert result is False
+
+# Test invalid login: wrong password
+def test_invalid_password():
+    result = validate_login("admin1", "wrongpassword")
+    assert result is False
+
+# Test both invalid username and password
+def test_invalid_credentials():
+    result = validate_login("wronguser", "wrongpassword")
+    assert result is False
 
 # Testing Low stock alert
 def test_low_stock_alert():

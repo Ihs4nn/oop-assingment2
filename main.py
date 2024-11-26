@@ -7,9 +7,16 @@ from Sections import InventorySection
 from RegularItems import PerishableItem, HeavyItem
 from UserDetails import User 
 from BaseInventoryItem import InventoryItem
+from UserAuthentication import validate_login
 
-# Predefined User for prototype:
+# # Predefined User for prototype:
 accepted_user = User("admin1", "1", "admin")
+
+# def validate_login(userid, password):
+#     # Validates user credentials based on username and password accepted above
+#     if userid == accepted_user.username and password == accepted_user.password:
+#         return True
+#     return False
 
 # Login screen
 class loginScreen(tk.Tk):
@@ -30,13 +37,13 @@ class loginScreen(tk.Tk):
         self.login_button = tk.Button(self, text="Login", command=self.validate_login)
         self.login_button.pack()
     
-    def validate_login(self):
+    def login_button_clicked(self):
         # Retrieve the username and password entered by the user
         userid = self.username_entry.get()
         password = self.password_entry.get()
 
         # Check if the entered username and password match the stored user
-        if userid == accepted_user.username and password == accepted_user.password:
+        if validate_login(userid, password):
             # Destroys the login box created
             self.destroy()
             # Shows message depending on role
