@@ -12,12 +12,6 @@ from UserAuthentication import validate_login
 # # Predefined User for prototype:
 accepted_user = User("admin1", "1", "admin")
 
-# def validate_login(userid, password):
-#     # Validates user credentials based on username and password accepted above
-#     if userid == accepted_user.username and password == accepted_user.password:
-#         return True
-#     return False
-
 # Login screen
 class loginScreen(tk.Tk):
     def __init__(self):
